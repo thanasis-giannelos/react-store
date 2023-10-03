@@ -1,8 +1,7 @@
-import ImageGallery from "../../components/image-gallery/ImageGallery";
-import Product from "./product";
-import { getProduct } from "../../services/apiProducts";
 import { LoaderFunctionArgs, useLoaderData } from "react-router-dom";
 import { useAppDispatch } from "../../hooks/hooks";
+import { getProduct } from "../../services/apiProducts";
+import ImageGallery from "../../ui/image-gallery/ImageGallery";
 import {
   CartItem,
   addToCart,
@@ -10,6 +9,7 @@ import {
   increment,
   removeFromCart,
 } from "../cart/cartSlice";
+import Product from "./product";
 
 export async function loader({ params }: LoaderFunctionArgs): Promise<Product> {
   return await getProduct(params.productId as string);

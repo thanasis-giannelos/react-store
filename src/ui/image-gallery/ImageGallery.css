@@ -1,0 +1,16 @@
+.image-gallery img {
+  width: 500px;
+  height: 500px;
+}
+
+.thumbnails {
+  display: flex;
+  justify-content: space-between;
+  height: 6rem;
+}
+
+.thumbnails img {
+  width: 6rem;
+  height: 6rem;
+  cursor: pointer;
+}

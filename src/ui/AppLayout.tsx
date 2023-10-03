@@ -1,6 +1,6 @@
 import { Outlet } from "react-router";
-import Header from "./Header";
 import { useNavigation } from "react-router-dom";
+import Header from "./Header";
 import Loader from "./Loader";
 
 function AppLayout() {
@@ -10,12 +10,12 @@ function AppLayout() {
   if (isLoading) return <Loader />;
 
   return (
-    <div>
+    <>
       <Header />
-      <main>
+      <main className="p-3">
         <Outlet />
       </main>
-    </div>
+    </>
   );
 }
 
