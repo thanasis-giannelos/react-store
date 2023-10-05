@@ -1,21 +1,42 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { getTotalCartQuantity } from "../features/cart/cartSlice";
-import { getUser } from "../features/user/userSlice";
-import { useAppSelector } from "../hooks/hooks";
+import { styled } from "styled-components";
+import UserWidget from "./UserWidget";
+import CartWidget from "./CartWidget";
+
+const HeaderBar = styled.header`
+  color: var(--color-brand-600);
+  background-color: var(--color-grey-200);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 2.5rem;
+  padding: 0.75rem 1rem;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+`;
+
+const StyledLink = styled(Link)`
+  font-weight: 800;
+`;
+
+const WidgetContainer = styled.div`
+  display: flex;
+  gap: 1rem;
+  font-size: 2rem;
+  align-items: center;
+`;
 
 const Header: React.FC = () => {
-  const totalQuantity = useAppSelector(getTotalCartQuantity);
-  const username = useAppSelector(getUser);
   return (
-    <header className="flex justify-between p-3 bg-yellow-500">
-      <Link to="/">ReactStore</Link>
-      <div>
-        <Link to="#">{username}</Link>
-        <Link to="cart">CART</Link>
-        <span className="text-yellow-500">{totalQuantity}</span>
-      </div>
-    </header>
+    <HeaderBar>
+      <StyledLink to="/">ReactStore</StyledLink>
+      <WidgetContainer>
+        <UserWidget />
+        <CartWidget />
+      </WidgetContainer>
+    </HeaderBar>
   );
 };
 

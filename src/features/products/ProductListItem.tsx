@@ -1,23 +1,65 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import Product from "./product";
-import { AppDispatch } from "../../store";
-import { useDispatch } from "react-redux";
 import {
   CartItem,
   addToCart,
   decrement,
+  getCurrentQuantityById,
   increment,
-  removeFromCart,
 } from "../cart/cartSlice";
+import { styled } from "styled-components";
+import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
+import { Link } from "react-router-dom";
+
+const ProductItem = styled.li`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  text-align: center;
+  padding: 1rem;
+`;
+
+const ProductControls = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1.25rem;
+`;
+
+const Button = styled.button`
+  border: none;
+  border-radius: var(--border-radius-sm);
+  box-shadow: var(--shadow-sm);
+
+  font-size: 1.4rem;
+  padding: 1.2rem 1.6rem;
+  font-weight: 500;
+
+  color: var(--color-brand-50);
+  background-color: var(--color-brand-600);
+
+  &:hover {
+    background-color: var(--color-brand-700);
+  }
+`;
+
+const ImgContainer = styled.div`
+  height: 300px;
+`;
+const Img = styled.img`
+  height: 100%;
+`;
 
 type ProductListItemProps = {
   item: Product;
 };
 
 const ProductListItem: React.FC<ProductListItemProps> = ({ item }) => {
-  const { id, title, thumbnail, price, rating } = item;
-  const dispatch = useDispatch<AppDispatch>();
+  const { id, title, thumbnail, price } = item;
+  const dispatch = useAppDispatch();
+  const quantity = useAppSelector((state) => getCurrentQuantityById(state, id));
 
   function addToCartHandler() {
     const newCartItem: CartItem = {
@@ -26,26 +68,35 @@ const ProductListItem: React.FC<ProductListItemProps> = ({ item }) => {
       name: title,
       quantity: 1,
       unitPrice: price,
-      totalPrice: 0,
+      totalPrice: price,
     };
     dispatch(addToCart(newCartItem));
   }
 
   return (
-    <li>
+    <ProductItem>
       <Link to={`${id}`}>
-        <img src={thumbnail} alt="" />
+        <ImgContainer>
+          <Img src={thumbnail} alt="" />
+        </ImgContainer>
         <div>
           <p>{title}</p>
-          <p>{price}</p>
-          <p>{rating}</p>
+          <p>$ {price}</p>
+          {/* <p>{rating}</p> */}
         </div>
       </Link>
-      <button onClick={addToCartHandler}>ADD TO CART</button>
-      <button onClick={() => dispatch(decrement(id))}>-</button>
-      <button onClick={() => dispatch(increment(id))}>+</button>
-      <button onClick={() => dispatch(removeFromCart(id))}>REMOVE</button>
-    </li>
+      <div>
+        {quantity ? (
+          <ProductControls>
+            <Button onClick={() => dispatch(decrement(id))}>-</Button>
+            <span>{quantity}</span>
+            <Button onClick={() => dispatch(increment(id))}>+</Button>
+          </ProductControls>
+        ) : (
+          <Button onClick={addToCartHandler}>ADD TO CART</Button>
+        )}
+      </div>
+    </ProductItem>
   );
 };
 
