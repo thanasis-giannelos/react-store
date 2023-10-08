@@ -10,7 +10,7 @@ const HeaderBar = styled.header`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: 2.5rem;
+  font-size: 3rem;
   padding: 0.75rem 1rem;
   position: sticky;
   top: 0;
@@ -23,9 +23,11 @@ const StyledLink = styled(Link)`
 
 const WidgetContainer = styled.div`
   display: flex;
-  gap: 1rem;
+  /* gap: rem; */
   font-size: 2rem;
   align-items: center;
+  justify-content: space-between;
+  width: 7rem;
 `;
 
 const Header: React.FC = () => {
