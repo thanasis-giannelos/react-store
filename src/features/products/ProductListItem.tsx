@@ -9,7 +9,6 @@ import {
 } from "../cart/cartSlice";
 import { styled } from "styled-components";
 import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
-import { Link } from "react-router-dom";
 
 const ProductItem = styled.li`
   display: flex;
@@ -75,7 +74,6 @@ const ProductListItem: React.FC<ProductListItemProps> = ({ item }) => {
 
   return (
     <ProductItem>
-      <Link to={`${id}`}>
         <ImgContainer>
           <Img src={thumbnail} alt="" />
         </ImgContainer>
@@ -84,7 +82,6 @@ const ProductListItem: React.FC<ProductListItemProps> = ({ item }) => {
           <p>$ {price}</p>
           {/* <p>{rating}</p> */}
         </div>
-      </Link>
       <div>
         {quantity ? (
           <ProductControls>
