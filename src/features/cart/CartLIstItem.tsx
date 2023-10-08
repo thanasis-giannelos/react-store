@@ -1,6 +1,7 @@
 import { styled } from "styled-components";
 import { useAppDispatch } from "../../hooks/hooks";
 import { CartItem, decrement, increment, removeFromCart } from "./cartSlice";
+import Button from "../../ui/Button";
 
 const StyledCartListItem = styled.li`
   display: flex;
@@ -29,23 +30,6 @@ const CartItemBtns = styled.div`
   gap: 1rem;
 `;
 
-const Button = styled.button`
-  border: none;
-  border-radius: var(--border-radius-sm);
-  box-shadow: var(--shadow-sm);
-
-  font-size: 1.4rem;
-  padding: 1.2rem 1.6rem;
-  font-weight: 500;
-
-  color: var(--color-brand-50);
-  background-color: var(--color-brand-600);
-
-  &:hover {
-    background-color: var(--color-brand-700);
-  }
-`;
-
 type CartItemProps = {
   item: CartItem;
 };
@@ -66,10 +50,10 @@ const CartLIstItem: React.FC<CartItemProps> = ({ item }) => {
           <p>$ {unitPrice}</p>
         </CartItemInfo>
         <CartItemBtns>
-          <Button onClick={() => dispatch(decrement(id))}>-</Button>
+          <Button variation="primary" size='medium' onClick={() => dispatch(decrement(id))}>-</Button>
           <span>{quantity}</span>
-          <Button onClick={() => dispatch(increment(id))}>+</Button>
-          <Button onClick={() => dispatch(removeFromCart(id))}>X</Button>
+          <Button variation="primary" size='medium' onClick={() => dispatch(increment(id))}>+</Button>
+          <Button variation="danger" size='medium' onClick={() => dispatch(removeFromCart(id))}>X</Button>
         </CartItemBtns>
       </CartItemContent>
     </StyledCartListItem>

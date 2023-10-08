@@ -5,6 +5,7 @@ import { clearCart, getCart, getTotalCartPrice } from "./cartSlice";
 import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
 import EmptyCart from "./EmptyCart";
 import styled from "styled-components";
+import Button from "../../ui/Button";
 
 const StyledCart = styled.div`
   max-width: 110rem;
@@ -36,40 +37,6 @@ const Total = styled.div`
   font-weight: 600;
 `;
 
-const Button = styled.button`
-  border: none;
-  border-radius: var(--border-radius-sm);
-  box-shadow: var(--shadow-sm);
-
-  font-size: 1.4rem;
-  padding: 1.2rem 1.6rem;
-  font-weight: 500;
-
-  color: var(--color-brand-50);
-  background-color: var(--color-brand-600);
-
-  &:hover {
-    background-color: var(--color-brand-700);
-  }
-`;
-
-const ClearCartButton = styled.button`
-  border: none;
-  border-radius: var(--border-radius-sm);
-  box-shadow: var(--shadow-sm);
-
-  font-size: 1.4rem;
-  padding: 1.2rem 1.6rem;
-  font-weight: 500;
-
-  color: var(--color-red-100);
-  background-color: var(--color-red-700);
-
-  &:hover {
-    background-color: var(--color-red-800);
-  }
-`;
-
 const Cart: React.FC = () => {
   const cart = useAppSelector(getCart);
   const dispatch = useAppDispatch();
@@ -90,12 +57,12 @@ const Cart: React.FC = () => {
           <span>Total:</span>
           <span>$ {totalPrice.toFixed(2)}</span>
         </Total>
-        <Button>
+        <Button variation="primary" size='large'>
           <Link to="/order/new">CHECKOUT</Link>
         </Button>
-        <ClearCartButton onClick={() => dispatch(clearCart())}>
+        <Button variation="danger" size='large' onClick={() => dispatch(clearCart())}>
           CLEAR CART
-        </ClearCartButton>
+        </Button>
       </CartActions>
     </StyledCart>
   );

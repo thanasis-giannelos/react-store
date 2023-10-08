@@ -4,15 +4,15 @@ import { useState } from "react";
 import { Order, createOrder, getOrder } from "./orderSlice";
 import { getUser } from "../user/userSlice";
 import {
-  Button,
   Header,
   Input,
   Form,
   InputGroup,
-  LoginWrapper,
-  StyledWelcome,
 } from "../../ui/Welcome";
+import { FlexContainer } from "../../ui/FlexContainer";
 import SuccessfulOrder from "./SuccessfulOrder";
+import Button from "../../ui/Button";
+import { CenteredWrapper } from "../../ui/CenteredWrapper";
 
 function CreateOrder() {
   const [name, setName] = useState("");
@@ -48,8 +48,8 @@ function CreateOrder() {
   }
 
   return (
-    <StyledWelcome>
-      <LoginWrapper>
+    <FlexContainer>
+      <CenteredWrapper>
         <Header>For Your Order</Header>
         <Form onSubmit={(e) => onSubmit(e)}>
           <InputGroup>
@@ -77,38 +77,11 @@ function CreateOrder() {
               onChange={(e) => setAddress(e.target.value)}
             />
           </InputGroup>
-          <Button type="submit">SUBMIT ORDER</Button>
+          <Button variation="primary" size='large' type="submit">SUBMIT ORDER</Button>
         </Form>
-      </LoginWrapper>
-    </StyledWelcome>
+      </CenteredWrapper>
+    </FlexContainer>
   );
-
-  // return (
-  //   <div>
-  //     <form onSubmit={(e) => onSubmit(e)}>
-  //       <input
-  //         type="text"
-  //         name="name"
-  //         placeholder="Name"
-  //         defaultValue={user}
-  //         onChange={(e) => setName(e.target.value)}
-  //       />
-  //       <input
-  //         type="text"
-  //         name="phone"
-  //         placeholder="Phone"
-  //         onChange={(e) => setPhone(e.target.value)}
-  //       />
-  //       <input
-  //         type="text"
-  //         name="address"
-  //         placeholder="Address"
-  //         onChange={(e) => setAddress(e.target.value)}
-  //       />
-  //       <button type="submit">SUBMIT ORDER</button>
-  //     </form>
-  //   </div>
-  // );
 }
 
 export default CreateOrder;

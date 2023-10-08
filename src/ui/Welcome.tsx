@@ -3,18 +3,9 @@ import { useAppDispatch, useAppSelector } from "../hooks/hooks";
 import { getUser, authenticateUser, User } from "../features/user/userSlice";
 import { Navigate, useNavigate } from "react-router-dom";
 import styled from "styled-components";
-
-export const StyledWelcome = styled.div`
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-
-export const LoginWrapper = styled.div`
-  width: 80%;
-  max-width: 400px;
-`;
+import Button from "./Button";
+import { FlexContainer } from "./FlexContainer";
+import { CenteredWrapper } from "./CenteredWrapper";
 
 export const Header = styled.h2`
   text-align: center;
@@ -40,22 +31,6 @@ export const Input = styled.input`
   box-shadow: var(--shadow-sm);
 `;
 
-export const Button = styled.button`
-  border: none;
-  border-radius: var(--border-radius-sm);
-  box-shadow: var(--shadow-sm);
-  color: var(--color-brand-50);
-  background-color: var(--color-brand-600);
-
-  font-size: 1.6rem;
-  padding: 1.2rem 2.4rem;
-  font-weight: 500;
-
-  &:hover {
-    background-color: var(--color-brand-700);
-  }
-`;
-
 function Welcome() {
   const [username, setUsername] = useState("sakis");
   const [password, setPassword] = useState("sakis");
@@ -73,8 +48,8 @@ function Welcome() {
   if (user) return <Navigate to="/products" />;
 
   return (
-    <StyledWelcome>
-      <LoginWrapper>
+    <FlexContainer>
+      <CenteredWrapper>
         <Header>ReactStore</Header>
         <Form onSubmit={(e) => onSubmit(e)}>
           <InputGroup>
@@ -93,10 +68,10 @@ function Welcome() {
               onChange={(e) => setPassword(e.target.value)}
             />
           </InputGroup>
-          <Button type="submit">Start Shopping</Button>
+          <Button size='large' variation='primary' type="submit">Start Shopping</Button>
         </Form>
-      </LoginWrapper>
-    </StyledWelcome>
+      </CenteredWrapper>
+    </FlexContainer>
   );
 }
 

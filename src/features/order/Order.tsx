@@ -1,8 +1,9 @@
 import { styled } from "styled-components";
 import { useAppSelector } from "../../hooks/hooks";
-import { StyledWelcome, Header } from "../../ui/Welcome";
-import { Wrapper } from "./SuccessfulOrder";
+import { Header } from "../../ui/Welcome";
 import { getOrder } from "./orderSlice";
+import { FlexContainer } from "../../ui/FlexContainer";
+import { FlexCenteredWrapper } from "./SuccessfulOrder";
 
 const FlexRow = styled.li`
   display: flex;
@@ -12,15 +13,15 @@ const FlexRow = styled.li`
 function Order() {
   const order = useAppSelector(getOrder);
   return (
-    <StyledWelcome>
-      <Wrapper>
+    <FlexContainer>
+      <FlexCenteredWrapper>
         <Header>Thank you!</Header>
         <Header>Order Confirmed</Header>
         <Header>Order Number: #{order?.id}</Header>
         <ul>
-          {order?.cart.map((item) => {
+          {order?.cart.map((item, index) => {
             return (
-              <FlexRow>
+              <FlexRow key={index}>
                 <span>
                   {item.quantity} {item.name}
                 </span>
@@ -33,8 +34,8 @@ function Order() {
           <span>Total:</span>
           <span>${order?.price}</span>
         </FlexRow>
-      </Wrapper>
-    </StyledWelcome>
+      </FlexCenteredWrapper>
+    </FlexContainer>
   );
 }
 

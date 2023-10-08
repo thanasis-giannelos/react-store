@@ -1,12 +1,13 @@
 import { Link } from "react-router-dom";
 import { useAppSelector } from "../../hooks/hooks";
 import { getOrder } from "./orderSlice";
-import { StyledWelcome, Header, Button } from "../../ui/Welcome";
+import { Header } from "../../ui/Welcome";
 import { styled } from "styled-components";
+import Button from "../../ui/Button";
+import { FlexContainer } from "../../ui/FlexContainer";
+import { CenteredWrapper } from "../../ui/CenteredWrapper";
 
-export const Wrapper = styled.div`
-  width: 80%;
-  max-width: 400px;
+export const FlexCenteredWrapper = styled(CenteredWrapper)`
   display: flex;
   flex-direction: column;
   gap: 1rem;
@@ -16,22 +17,15 @@ function SuccessfulOrder() {
   const order = useAppSelector(getOrder);
 
   return (
-    <StyledWelcome>
-      <Wrapper>
+    <FlexContainer>
+      <FlexCenteredWrapper>
         <Header>Your Order Submitted Successfully!</Header>
-        <Button>
+        <Button variation="primary" size='large'>
           <Link to={`/order/${order?.id}`}>SHOW ORDER</Link>
         </Button>
-      </Wrapper>
-    </StyledWelcome>
+      </FlexCenteredWrapper>
+    </FlexContainer>
   );
-
-  // return (
-  //   <div>
-  //     <h3>Your Order Submitted Successfully!</h3>
-  //     <Link to={`/order/${order?.id}`}>Show Order</Link>
-  //   </div>
-  // );
 }
 
 export default SuccessfulOrder;

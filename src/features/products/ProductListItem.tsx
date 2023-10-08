@@ -9,6 +9,7 @@ import {
 } from "../cart/cartSlice";
 import { styled } from "styled-components";
 import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
+import Button from "../../ui/Button";
 
 const ProductItem = styled.li`
   display: flex;
@@ -25,23 +26,6 @@ const ProductControls = styled.div`
   justify-content: space-between;
   align-items: center;
   gap: 1.25rem;
-`;
-
-const Button = styled.button`
-  border: none;
-  border-radius: var(--border-radius-sm);
-  box-shadow: var(--shadow-sm);
-
-  font-size: 1.4rem;
-  padding: 1.2rem 1.6rem;
-  font-weight: 500;
-
-  color: var(--color-brand-50);
-  background-color: var(--color-brand-600);
-
-  &:hover {
-    background-color: var(--color-brand-700);
-  }
 `;
 
 const ImgContainer = styled.div`
@@ -80,17 +64,16 @@ const ProductListItem: React.FC<ProductListItemProps> = ({ item }) => {
         <div>
           <p>{title}</p>
           <p>$ {price}</p>
-          {/* <p>{rating}</p> */}
         </div>
       <div>
         {quantity ? (
           <ProductControls>
-            <Button onClick={() => dispatch(decrement(id))}>-</Button>
+            <Button variation="primary" size='medium' onClick={() => dispatch(decrement(id))}>-</Button>
             <span>{quantity}</span>
-            <Button onClick={() => dispatch(increment(id))}>+</Button>
+            <Button variation="primary" size='medium' onClick={() => dispatch(increment(id))}>+</Button>
           </ProductControls>
         ) : (
-          <Button onClick={addToCartHandler}>ADD TO CART</Button>
+          <Button variation="primary" size='medium' onClick={addToCartHandler}>ADD TO CART</Button>
         )}
       </div>
     </ProductItem>
